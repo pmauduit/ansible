@@ -9,6 +9,11 @@ RewriteRule ^/extractorapp/admin$ /extractorapp/admin/ [R]
 RewriteRule ^/ldapadmin/privateui$ /ldapadmin/privateui/ [R]
 {% endif %}
 {% if item.dest == 'proxy' %}
+
+ProxyPass /saml/ http://localhost::{{ tomcat_instances['proxycas']['port'] }}/saml/
+ProxyPassReverse /saml/ http://localhost::{{ tomcat_instances['proxycas']['port'] }}/saml/
+
+
 ProxyPass /casfailed.jsp http://localhost:{{ tomcat_instances['proxycas']['port'] }}/casfailed.jsp
 ProxyPassReverse /casfailed.jsp http://localhost:{{ tomcat_instances['proxycas']['port'] }}/casfailed.jsp
 
